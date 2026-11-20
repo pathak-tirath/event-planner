@@ -1,36 +1,17 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gather — Event Planner
 
-## Getting Started
+A small full stack event planner built with Next.js and PostgreSQL. Create events with a title, date and time, location, and optional details. The home page lists upcoming events and can search them by title, location, or details.
 
-First, run the development server:
+## Get started
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+1. Install the project dependencies with `npm install`.
+2. Create a PostgreSQL database named `event_planner` (or choose another database and use its connection URL).
+3. Copy `.env.example` to `.env.local` and set `DATABASE_URL`.
+4. Start the app with `npm run dev` and open [http://localhost:3000](http://localhost:3000).
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+The API creates the `events` table on first use. The matching SQL is in `database/schema.sql` if you prefer to create it yourself. Hosted databases that require TLS can use `DATABASE_SSL=true`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## API
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- `GET /api/events` — list the next 100 events, including events that started within the last day.
+- `POST /api/events` — create an event. Required fields: `title`, `location`, and ISO `startsAt`; `description` is optional.

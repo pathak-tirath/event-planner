@@ -1,0 +1,10 @@
+CREATE TABLE IF NOT EXISTS events (
+  id BIGINT GENERATED ALWAYS AS IDENTITY PRIMARY KEY,
+  title VARCHAR(120) NOT NULL,
+  description VARCHAR(500),
+  location VARCHAR(160) NOT NULL,
+  starts_at TIMESTAMPTZ NOT NULL,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+CREATE INDEX IF NOT EXISTS events_starts_at_idx ON events (starts_at);
